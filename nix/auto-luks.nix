@@ -103,7 +103,9 @@ with utils;
 
           { description = "Cryptographic Setup of Device ${mapperDevice}";
             wantedBy = [ mapperDevice'' ];
-            #before = [ mapperDevice'' "mkfs-${mapperDevice'}.service" ];
+            before = [
+              #mapperDevice''
+              "mkfs-${mapperDevice'}.service" ];
             requires = [ device' "keys.target" ];
             after = [ device' "keys.target" ];
             path = [ pkgs.cryptsetup pkgs.utillinux ];
